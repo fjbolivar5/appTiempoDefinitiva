@@ -1,0 +1,71 @@
+<style>
+
+    #Inicio{
+      margin: 0;
+      height: 100vh;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      position: relative;
+    }
+  
+    #Inicio:before {
+        content:'';
+        position: absolute;
+      top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,0.7);
+    }
+  
+    #texto{
+      margin-top: 110px;
+      position: relative;
+    }
+  
+  </style>
+
+
+    <!-- Añadimos unos div donde el usuario interactua con la pagina -->
+    <div id="texto" class="mask">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          
+          <!-- Escribimos frases para que el usuario las lea -->
+          <h1 class="mb-3">El Tiempo meteorológico en toda España</h1>
+          <a class="mb-3">Busca por Provincia: </a>
+  
+          <!-- Y le añadimos un pequño formulario donde metera el nombre de la Provincia o Municipio -->
+          <br><br>
+          <form>
+          <label style="padding-right: 10px;">Provincia:</label>
+          <select name="miselect2" [(ngModel)]="idProvincia" required>
+            <option [ngValue]="item" *ngFor="let item of provincias">{{item.toString().substring(3)}}</option>
+          </select>
+          <br><br>
+          <label style="padding-right: 10px;">Fecha:</label>
+          <input type="date" name="fecha" [(ngModel)]="fecha" required/>
+          <br><br>
+          <input type="submit" value="Buscar" (click)="buscarProvincia()">
+        </form>
+        <br>
+        <div *ngIf="tiempo.codprov!=''">
+          <p><b>Provincia: </b> {{ provincia.nombre }} - <b>Capital:</b> {{ provincia.capital }}</p>
+        </div>
+        <div *ngIf="tiempo.hoy!=''">
+          <p>
+            <b>Previsión para ({{ tiempo.fecha | date }}):</b>
+            {{ tiempo.hoy }}
+          </p>
+        </div>
+        <div *ngIf="tiempo.manana!=''">
+          <p>
+            <b>Previsión para el siguiente día:</b>
+            {{ tiempo.manana }}
+          </p>
+        </div>
+        </div>
+      </div>
+    </div>   

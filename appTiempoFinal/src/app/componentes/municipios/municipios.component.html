@@ -1,0 +1,68 @@
+<style>
+
+    #Inicio{
+      margin: 0;
+      height: 100vh;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      position: relative;
+    }
+  
+    #Inicio:before {
+        content:'';
+        position: absolute;
+      top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,0.7);
+    }
+  
+    #texto{
+      margin-top: 110px;
+      position: relative;
+    }
+  
+  </style>
+  
+
+
+    <!-- Añadimos unos div donde el usuario interactua con la pagina -->
+    <div id="texto" class="mask">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          
+          <!-- Escribimos frases para que el usuario las lea -->
+          <h1 class="mb-3">El Tiempo meteorológico en toda España</h1>
+          <a class="mb-3">Busca por Municipio: </a>
+  
+          <!-- Y le añadimos un pequño formulario donde metera el nombre de la Provincia o Municipio -->
+          <br><br>
+          <form>
+            <div class="form-group mx-sm-3 mb-2">
+              <label style="padding-right: 10px;">Municipio: </label>
+              <!-- <input type="text" name="idMuni" [(ngModel)]="idMunicipio" required/> -->
+              <select name="idMunicipio" [(ngModel)]="idMunicipio" required>
+                <option [ngValue]="item" *ngFor="let item of municipios">{{item.toString()}}</option>
+              </select>
+              <br />
+            </div>
+            <br>
+            <label style="padding-right: 10px;">Fecha:</label>
+            <input type="date" name="fecha" [(ngModel)]="fecha" required/>
+            <br>
+            <!-- Creamos el boton para que el usuario pueda subir el nombre escrito en el formulario -->
+            <input type="submit" value="Buscar" (click)="buscarMunicipio()">
+          </form>
+          <br>
+          <div *ngIf="municipio.nombre!=''">
+            <p>Municipio: <b>{{ municipio.nombre }}</b></p>
+            <p>
+              Previsión para ( {{ tiempoM.fecha }} ): Maxima de <b>{{ tiempoM.maxima }}</b> ºC - Minima de <b>{{ tiempoM.minima }}</b> ºC
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
